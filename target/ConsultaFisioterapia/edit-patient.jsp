@@ -15,7 +15,7 @@
     <meta http.equiv="Content-Type">
     <meta content="text/html">
     <meta charset="UTF-8">
-    <title>Delete-patient</title>
+    <title>Edit-paciente</title>
 </head>
 <body>
     <form action="edit-paciente" method="post">

@@ -24,9 +24,9 @@ public class Database {
         return connection;
     }
 
-    public void closeConnection() {
+    public void closeConnection(Connection connection) {
         try {
-           connection.close();
+           this.connection.close();
             System.out.println("Desconectado!");
         } catch (SQLException sqle) {
             sqle.printStackTrace();

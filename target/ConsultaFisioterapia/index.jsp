@@ -187,7 +187,7 @@
                 <% for (Fisioterapeuta fisioterapeuta : fisioterapeutas) { %>
                 <div class="col">
                   <div class="card h-100">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    <img src="https://www.ayuntamientodemanzanilla.es/export/sites/manzanilla/es/.galleries/otros/Menu-Recursos/farmacia-logo.jpg_635807747.jpg" class="bd-placeholder-img card-img-top" alt="User Icon">
                     <div class="card-body">
                       <h5 class="card-title"><%= fisioterapeuta.getNombre() %> <%= fisioterapeuta.getApellidos() %></h5>
                       <p class="card-text">
@@ -199,7 +199,10 @@
                                 <input type="hidden" name="physioId" value="<%= fisioterapeuta.getId() %>">
                                 <button type="submit" class="btn btn-sm btn-outline-secondary">Ver datos</button>
                             </form>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            <form method="POST" action="/consultaFisioterapia/add-treatment.jsp">
+                                <input type="hidden" name="physioId" value="<%= fisioterapeuta.getId() %>">
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Añadir tratamiento</button>
+                            </form>
                             <form method="POST" action="/consultaFisioterapia/delete-physio.jsp">
                                 <input type="hidden" name="physioId" value="<%= fisioterapeuta.getId() %>">
                                 <button type="submit" class="btn btn-sm btn-outline-secondary">Borrar</button>
@@ -230,7 +233,7 @@
                 <% for (Paciente paciente : pacientes) { %>
                 <div class="col">
                   <div class="card h-100">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png" class="bd-placeholder-img card-img-top" alt="User Icon">
                     <div class="card-body">
                       <h5 class="card-title"><%= paciente.getNombre() %> <%= paciente.getApellidos() %></h5>
                       <p class="card-text">

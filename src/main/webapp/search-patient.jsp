@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add-patient</title>
+    <title>Search-patient</title>
 </head>
 <body>
     <form action="/consultaFisioterapia/patient-searched.jsp" method="post">

@@ -3,6 +3,7 @@ package com.svalero.centroFisioterapia.dao;
 
 import com.svalero.centroFisioterapia.fisioterapeuta.Fisioterapeuta;
 import com.svalero.centroFisioterapia.paciente.Paciente;
+import com.svalero.centroFisioterapia.tratamientos.Tratamiento;
 import com.svalero.centroFisioterapia.util.DateUtils;
 
 
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +56,24 @@ public class FisioterapeutaDAO {
         } else {
             return null;
         }
+    }
+
+    public List<Tratamiento> getTratamientosPorIdFisioterapeuta(String idFisioterapeuta) throws SQLException {
+        List<Tratamiento> tratamientos = new ArrayList<>();
+        String sql = "SELECT * FROM TRATAMIENTOS WHERE ID_FISIOTERAPEUTA = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, idFisioterapeuta);
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    String id_paciente = result.getString("ID_PACIENTE");
+                    String motivo = result.getString("MOTIVO");
+                    LocalDate fechaTratamiento = result.getDate("FECHA_DE_TRATAMIENTO").toLocalDate();
+                    Tratamiento tratamiento = new Tratamiento(id_paciente, motivo, fechaTratamiento);
+                    tratamientos.add(tratamiento);
+                }
+            }
+        }
+        return tratamientos;
     }
 
     public List<Fisioterapeuta> verTodosFisios() throws SQLException {

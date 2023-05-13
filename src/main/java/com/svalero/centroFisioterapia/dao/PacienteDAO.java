@@ -1,6 +1,7 @@
 package com.svalero.centroFisioterapia.dao;
 
 import com.svalero.centroFisioterapia.paciente.Paciente;
+import com.svalero.centroFisioterapia.tratamientos.Tratamiento;
 import com.svalero.centroFisioterapia.util.DateUtils;
 
 
@@ -84,6 +85,24 @@ public class PacienteDAO {
             return null;
         }
     }
+
+    public Paciente getIdPacientePorNombre(String nombreBuscado, String apellidoBuscado) throws SQLException {
+        String sql = "SELECT ID_PACIENTE FROM PACIENTES WHERE NOMBRE = ? AND APELLIDO = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, nombreBuscado);
+        statement.setString(2, apellidoBuscado);
+        ResultSet result = statement.executeQuery();
+
+        if (result.next()) {
+            Paciente paciente = new Paciente(result.getString("ID_PACIENTE"));
+
+            paciente.setId(result.getString("ID_PACIENTE"));
+            return paciente;
+        } else {
+            return null;
+        }
+    }
+
 
     public boolean editarTelefonoPaciente(int nuevoTelefono, String patientId) throws SQLException {
         String sql = "UPDATE PACIENTES SET TELEFONO = ? WHERE ID_PACIENTE = ?";
