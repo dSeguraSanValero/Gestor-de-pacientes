@@ -132,7 +132,6 @@ public class FisioterapeutaDAO {
             Fisioterapeuta fisioterapeuta = new Fisioterapeuta(id, idConsulta, nombre, apellido);
             fisioterapeutas.add(fisioterapeuta);
         }
-
         return fisioterapeutas;
     }
 
