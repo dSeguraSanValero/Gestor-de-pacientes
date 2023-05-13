@@ -1,3 +1,4 @@
+com\svalero\centroFisioterapia\servlet\EditPacienteServlet.class
 com\svalero\centroFisioterapia\dao\PacienteDAO.class
 com\svalero\centroFisioterapia\servlet\DeleteFisioterapeutaServlet.class
 com\svalero\centroFisioterapia\paciente\Paciente.class

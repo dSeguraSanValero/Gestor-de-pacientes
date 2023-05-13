@@ -241,7 +241,10 @@
                             <input type="hidden" name="patientId" value="<%= paciente.getId() %>">
                             <button type="submit" class="btn btn-sm btn-outline-secondary">Ver datos</button>
                           </form>
-                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                          <form method="POST" action="/consultaFisioterapia/edit-patient.jsp">
+                            <input type="hidden" name="patientId" value="<%= paciente.getId() %>">
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">Editar</button>
+                          </form>
                           <form method="POST" action="/consultaFisioterapia/delete-patient.jsp">
                             <input type="hidden" name="patientId" value="<%= paciente.getId() %>">
                             <button type="submit" class="btn btn-sm btn-outline-secondary">Borrar</button>

@@ -19,6 +19,7 @@ public class PacienteDAO {
         this.connection = connection;
     }
 
+
     public void registrarPaciente(Paciente paciente) throws SQLException {
         String sql = "INSERT INTO PACIENTES (ID_PACIENTE, NOMBRE, APELLIDO, FECHA_DE_NACIMIENTO, TELEFONO) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -82,6 +83,14 @@ public class PacienteDAO {
         } else {
             return null;
         }
+    }
+
+    public boolean editarTelefonoPaciente(int nuevoTelefono, String patientId) throws SQLException {
+        String sql = "UPDATE PACIENTES SET TELEFONO = ? WHERE ID_PACIENTE = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, nuevoTelefono);
+        statement.setString(2, patientId);
+        return statement.executeUpdate() != 0;
     }
 
 
