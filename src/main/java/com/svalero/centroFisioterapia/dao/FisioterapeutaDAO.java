@@ -2,9 +2,7 @@ package com.svalero.centroFisioterapia.dao;
 
 
 import com.svalero.centroFisioterapia.fisioterapeuta.Fisioterapeuta;
-import com.svalero.centroFisioterapia.paciente.Paciente;
 import com.svalero.centroFisioterapia.tratamientos.Tratamiento;
-import com.svalero.centroFisioterapia.util.DateUtils;
 
 
 import java.sql.Connection;
@@ -40,6 +38,29 @@ public class FisioterapeutaDAO {
         String sql = "SELECT ID_FISIOTERAPEUTA, ID_CONSULTA, NOMBRE, APELLIDO FROM FISIOTERAPEUTAS WHERE ID_FISIOTERAPEUTA = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, idFisioterapeuta);
+        ResultSet result = statement.executeQuery();
+
+        if (result.next()) {
+            Fisioterapeuta fisioterapeuta = new Fisioterapeuta(result.getString("ID_FISIOTERAPEUTA"),
+                    result.getString("ID_CONSULTA"),
+                    result.getString("NOMBRE"),
+                    result.getString("APELLIDO"));
+
+            fisioterapeuta.setId(result.getString("ID_FISIOTERAPEUTA"));
+            fisioterapeuta.setIdConsulta(result.getString("ID_CONSULTA"));
+            fisioterapeuta.setNombre(result.getString("NOMBRE"));
+            fisioterapeuta.setApellidos(result.getString("APELLIDO"));
+            return fisioterapeuta;
+        } else {
+            return null;
+        }
+    }
+
+    public Fisioterapeuta getFisioterapeutaPorNombre(String nombreBuscado, String apellidoBuscado) throws SQLException {
+        String sql = "SELECT ID_FISIOTERAPEUTA, ID_CONSULTA, NOMBRE, APELLIDO FROM FISIOTERAPEUTAS WHERE NOMBRE = ? AND APELLIDO = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, nombreBuscado);
+        statement.setString(2, apellidoBuscado);
         ResultSet result = statement.executeQuery();
 
         if (result.next()) {
