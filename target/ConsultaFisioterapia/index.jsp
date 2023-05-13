@@ -204,6 +204,10 @@
                                 <input type="hidden" name="physioId" value="<%= fisioterapeuta.getId() %>">
                                 <button type="submit" class="btn btn-sm btn-outline-secondary">Añadir tratamiento</button>
                             </form>
+                            <form method="POST" action="/consultaFisioterapia/edit-physio.jsp">
+                                <input type="hidden" name="physioId" value="<%= fisioterapeuta.getId() %>">
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Editar</button>
+                            </form>
                             <form method="POST" action="/consultaFisioterapia/delete-physio.jsp">
                                 <input type="hidden" name="physioId" value="<%= fisioterapeuta.getId() %>">
                                 <button type="submit" class="btn btn-sm btn-outline-secondary">Borrar</button>

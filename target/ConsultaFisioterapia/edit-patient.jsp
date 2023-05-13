@@ -21,6 +21,10 @@
     <form action="edit-paciente" method="post">
         <label for="nuevoTelefono">Nuevo numero de telefono del paciente:</label>
         <input type="text" id="nuevoTelefono" name="nuevoTelefono"><br>
+        <label for="nuevoNombre">Nuevo nombre del paciente:</label>
+        <input type="text" id="nuevoNombre" name="nuevoNombre"><br>
+        <label for="nuevoApellido">Nuevo nombre del paciente:</label>
+        <input type="text" id="nuevoApellido" name="nuevoApellido"><br>
         <input type="hidden" id="patientId" name="patientId" value="<%= patientId %>">
         <input type="submit" value="Registrar">
     </form>

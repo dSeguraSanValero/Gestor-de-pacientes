@@ -136,4 +136,13 @@ public class FisioterapeutaDAO {
         return fisioterapeutas;
     }
 
+    public boolean editarFisioterapeuta(String nuevoNombre, String nuevoApellido, String physioId) throws SQLException {
+        String sql = "UPDATE FISIOTERAPEUTAS SET NOMBRE = ?, APELLIDO = ? WHERE ID_FISIOTERAPEUTA = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, nuevoNombre);
+        statement.setString(2, nuevoApellido);
+        statement.setString(3, physioId);
+        return statement.executeUpdate() != 0;
+    }
+
 }

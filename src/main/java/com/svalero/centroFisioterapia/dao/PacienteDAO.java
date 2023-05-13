@@ -104,11 +104,13 @@ public class PacienteDAO {
     }
 
 
-    public boolean editarTelefonoPaciente(int nuevoTelefono, String patientId) throws SQLException {
-        String sql = "UPDATE PACIENTES SET TELEFONO = ? WHERE ID_PACIENTE = ?";
+    public boolean editarPaciente(int nuevoTelefono, String nuevoNombre, String nuevoApellido, String patientId) throws SQLException {
+        String sql = "UPDATE PACIENTES SET TELEFONO = ?, NOMBRE = ?, APELLIDO = ? WHERE ID_PACIENTE = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, nuevoTelefono);
-        statement.setString(2, patientId);
+        statement.setString(2, nuevoNombre);
+        statement.setString(3, nuevoApellido);
+        statement.setString(4, patientId);
         return statement.executeUpdate() != 0;
     }
 

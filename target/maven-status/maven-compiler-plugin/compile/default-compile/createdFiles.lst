@@ -3,6 +3,7 @@ com\svalero\centroFisioterapia\dao\PacienteDAO.class
 com\svalero\centroFisioterapia\servlet\DeleteFisioterapeutaServlet.class
 com\svalero\centroFisioterapia\tratamientos\Tratamiento.class
 com\svalero\centroFisioterapia\servlet\AddPacienteServlet.class
+com\svalero\centroFisioterapia\servlet\EditFisioterapeutaServlet.class
 com\svalero\centroFisioterapia\dao\Database.class
 com\svalero\centroFisioterapia\dao\TratamientoDAO.class
 com\svalero\centroFisioterapia\util\DateUtils.class
