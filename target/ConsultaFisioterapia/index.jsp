@@ -167,6 +167,7 @@
             <p class="lead text-body-secondary">Introduce, modifica, elimina registros sobre tus pacientes y sus tratamientos, para tu consulta de fisioterapia</p>
             <p>
               <a href="/consultaFisioterapia/add-patient.jsp" class="btn btn-primary my-2">Añadir a un paciente</a>
+              <a href="/consultaFisioterapia/search-patient.jsp" class="btn btn-primary my-2">Buscar a un paciente</a>
               <a href="/consultaFisioterapia/add-physio.jsp" class="btn btn-secondary my-2">Añadir a un fisioterapeuta</a>
             </p>
           </div>

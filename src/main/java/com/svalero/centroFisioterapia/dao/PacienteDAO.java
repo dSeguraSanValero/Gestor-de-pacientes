@@ -59,6 +59,31 @@ public class PacienteDAO {
         }
     }
 
+    public Paciente getPacientePorNombre(String nombreBuscado, String apellidoBuscado) throws SQLException {
+        String sql = "SELECT ID_PACIENTE, NOMBRE, APELLIDO, FECHA_DE_NACIMIENTO, TELEFONO FROM PACIENTES WHERE NOMBRE = ? AND APELLIDO = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, nombreBuscado);
+        statement.setString(2, apellidoBuscado);
+        ResultSet result = statement.executeQuery();
+
+        if (result.next()) {
+            Paciente paciente = new Paciente(result.getString("ID_PACIENTE"),
+                    result.getString("NOMBRE"),
+                    result.getString("APELLIDO"),
+                    DateUtils.toLocalDate(result.getDate("FECHA_DE_NACIMIENTO")),
+                    result.getInt("TELEFONO"));
+
+            paciente.setId(result.getString("ID_PACIENTE"));
+            paciente.setNombre(result.getString("NOMBRE"));
+            paciente.setApellidos(result.getString("APELLIDO"));
+            paciente.setFechaNacimiento(DateUtils.toLocalDate(result.getDate("FECHA_DE_NACIMIENTO")));
+            paciente.setTelefono(result.getInt("TELEFONO"));
+            return paciente;
+        } else {
+            return null;
+        }
+    }
+
 
     public List<Paciente> verTodosPacientes() throws SQLException {
         String sql = "SELECT * FROM PACIENTES";
