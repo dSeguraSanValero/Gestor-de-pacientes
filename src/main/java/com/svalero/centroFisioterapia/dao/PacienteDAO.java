@@ -20,7 +20,7 @@ public class PacienteDAO {
     }
 
     public void registrarPaciente(Paciente paciente) throws SQLException {
-        String sql = "INSERT INTO PACIENTES (id, nombre, apellido, fechaNacimiento, telefono) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PACIENTES (ID_PACIENTE, NOMBRE, APELLIDO, FECHA_DE_NACIMIENTO, TELEFONO) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, paciente.getId());
         statement.setString(2, paciente.getNombre());
@@ -35,6 +35,31 @@ public class PacienteDAO {
 
     }
 
+    public Paciente getPacientePorId(String idPaciente) throws SQLException {
+        String sql = "SELECT ID_PACIENTE, NOMBRE, APELLIDO, FECHA_DE_NACIMIENTO, TELEFONO FROM PACIENTES WHERE ID_PACIENTE = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, idPaciente);
+        ResultSet result = statement.executeQuery();
+
+        if (result.next()) {
+            Paciente paciente = new Paciente(result.getString("ID_PACIENTE"),
+                    result.getString("NOMBRE"),
+                    result.getString("APELLIDO"),
+                    DateUtils.toLocalDate(result.getDate("FECHA_DE_NACIMIENTO")),
+                    result.getInt("TELEFONO"));
+
+            paciente.setId(result.getString("ID_PACIENTE"));
+            paciente.setNombre(result.getString("NOMBRE"));
+            paciente.setApellidos(result.getString("APELLIDO"));
+            paciente.setFechaNacimiento(DateUtils.toLocalDate(result.getDate("FECHA_DE_NACIMIENTO")));
+            paciente.setTelefono(result.getInt("TELEFONO"));
+            return paciente;
+        } else {
+            return null;
+        }
+    }
+
+
     public List<Paciente> verTodosPacientes() throws SQLException {
         String sql = "SELECT * FROM PACIENTES";
 
@@ -44,15 +69,16 @@ public class PacienteDAO {
         return getList(resultSet);
     }
 
+
     public boolean borrarPaciente(String nombre) throws SQLException {
-        String sql = "DELETE FROM PACIENTES WHERE nombre = ?";
+        String sql = "DELETE FROM PACIENTES WHERE NOMBRE = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, nombre);
         return statement.executeUpdate() != 0;
     }
 
     public boolean borrarPacientePorId(String patientId) throws SQLException {
-        String sql = "DELETE FROM PACIENTES WHERE id = ?";
+        String sql = "DELETE FROM PACIENTES WHERE ID_PACIENTE = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, patientId);
         return statement.executeUpdate() != 0;
@@ -62,11 +88,11 @@ public class PacienteDAO {
         List<Paciente> pacientes = new ArrayList<>();
 
         while (resultSet.next()) {
-            String id = resultSet.getString("id");
-            String nombre = resultSet.getString("nombre");
-            String apellido = resultSet.getString("apellido");
-            LocalDate fechaNacimiento = resultSet.getDate("fechaNacimiento").toLocalDate();
-            int telefono = resultSet.getInt("telefono");
+            String id = resultSet.getString("ID_PACIENTE");
+            String nombre = resultSet.getString("NOMBRE");
+            String apellido = resultSet.getString("APELLIDO");
+            LocalDate fechaNacimiento = resultSet.getDate("FECHA_DE_NACIMIENTO").toLocalDate();
+            int telefono = resultSet.getInt("TELEFONO");
 
             Paciente paciente = new Paciente(id, nombre, apellido, fechaNacimiento, telefono);
             pacientes.add(paciente);

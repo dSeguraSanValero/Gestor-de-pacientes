@@ -1,8 +1,10 @@
 C:\Users\Lenovo\IdeaProjects\ActividadAprendizaje2DanielSegura\src\main\java\com\svalero\centroFisioterapia\dao\Database.java
 C:\Users\Lenovo\IdeaProjects\ActividadAprendizaje2DanielSegura\src\main\java\com\svalero\centroFisioterapia\dao\PacienteDAO.java
+C:\Users\Lenovo\IdeaProjects\ActividadAprendizaje2DanielSegura\src\main\java\com\svalero\centroFisioterapia\servlet\DeleteFisioterapeutaServlet.java
 C:\Users\Lenovo\IdeaProjects\ActividadAprendizaje2DanielSegura\src\main\java\com\svalero\centroFisioterapia\servlet\DeletePacienteServlet.java
-C:\Users\Lenovo\IdeaProjects\ActividadAprendizaje2DanielSegura\src\main\java\com\svalero\centroFisioterapia\Aplicacion.java
+C:\Users\Lenovo\IdeaProjects\ActividadAprendizaje2DanielSegura\src\main\java\com\svalero\centroFisioterapia\dao\FisioterapeutaDAO.java
+C:\Users\Lenovo\IdeaProjects\ActividadAprendizaje2DanielSegura\src\main\java\com\svalero\centroFisioterapia\fisioterapeuta\Fisioterapeuta.java
+C:\Users\Lenovo\IdeaProjects\ActividadAprendizaje2DanielSegura\src\main\java\com\svalero\centroFisioterapia\servlet\AddFisioterapeutaServlet.java
 C:\Users\Lenovo\IdeaProjects\ActividadAprendizaje2DanielSegura\src\main\java\com\svalero\centroFisioterapia\util\DateUtils.java
 C:\Users\Lenovo\IdeaProjects\ActividadAprendizaje2DanielSegura\src\main\java\com\svalero\centroFisioterapia\paciente\Paciente.java
-C:\Users\Lenovo\IdeaProjects\ActividadAprendizaje2DanielSegura\src\main\java\com\svalero\centroFisioterapia\Menu.java
 C:\Users\Lenovo\IdeaProjects\ActividadAprendizaje2DanielSegura\src\main\java\com\svalero\centroFisioterapia\servlet\AddPacienteServlet.java

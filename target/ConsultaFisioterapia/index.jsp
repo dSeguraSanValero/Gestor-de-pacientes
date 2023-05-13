@@ -1,8 +1,8 @@
 <%@ page import = "com.svalero.centroFisioterapia.dao.Database" %>
 <%@ page import = "com.svalero.centroFisioterapia.dao.PacienteDAO" %>
+<%@ page import = "com.svalero.centroFisioterapia.dao.FisioterapeutaDAO" %>
 <%@ page import = "com.svalero.centroFisioterapia.paciente.Paciente" %>
-<%@ page import = "com.svalero.centroFisioterapia.Aplicacion" %>
-<%@ page import = "com.svalero.centroFisioterapia.Menu" %>
+<%@ page import = "com.svalero.centroFisioterapia.fisioterapeuta.Fisioterapeuta" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.sql.SQLException" %>
@@ -167,18 +167,61 @@
             <p class="lead text-body-secondary">Introduce, modifica, elimina registros sobre tus pacientes y sus tratamientos, para tu consulta de fisioterapia</p>
             <p>
               <a href="/consultaFisioterapia/add-patient.jsp" class="btn btn-primary my-2">Añadir a un paciente</a>
-              <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+              <a href="/consultaFisioterapia/add-physio.jsp" class="btn btn-secondary my-2">Añadir a un fisioterapeuta</a>
             </p>
           </div>
         </div>
       </section>
 
-      <h2 class="título-seccion">Pacientes</h2>
+      <h2 class="título-seccion">Fisioterapeutas</h2>
 
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
           <% Database db = new Database();
-             PacienteDAO dao = new PacienteDAO(db.getConnection());
+             FisioterapeutaDAO daoF = new FisioterapeutaDAO(db.getConnection());
+             List<Fisioterapeuta> fisioterapeutas = daoF.verTodosFisios();
+          %>
+            <div class="col-md-9">
+              <div class="row row-cols-1 row-cols-md-3 g-4">
+                <% for (Fisioterapeuta fisioterapeuta : fisioterapeutas) { %>
+                <div class="col">
+                  <div class="card h-100">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= fisioterapeuta.getNombre() %> <%= fisioterapeuta.getApellidos() %></h5>
+                      <p class="card-text">
+                        <p>Identificador de la consulta en la que trabaja: <%= fisioterapeuta.getIdConsulta() %></p>
+                      </p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <form method="POST" action="/consultaFisioterapia/view-physio.jsp">
+                                <input type="hidden" name="physioId" value="<%= fisioterapeuta.getId() %>">
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Ver datos</button>
+                            </form>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            <form method="POST" action="/consultaFisioterapia/delete-physio.jsp">
+                                <input type="hidden" name="physioId" value="<%= fisioterapeuta.getId() %>">
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Borrar</button>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <h2 class="título-seccion">Pacientes</h2>
+
+      <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+          <% PacienteDAO dao = new PacienteDAO(db.getConnection());
              List<Paciente> pacientes = dao.verTodosPacientes();
           %>
             <div class="col-md-9">
@@ -190,13 +233,13 @@
                     <div class="card-body">
                       <h5 class="card-title"><%= paciente.getNombre() %> <%= paciente.getApellidos() %></h5>
                       <p class="card-text">
-                        <p>Fecha de nacimiento: <%= paciente.getFechaNacimiento() %></p>
-                        <p>Telefono: <%= paciente.getTelefono() %></p>
-                        <p>Identificador de paciente: <%= paciente.getId() %></p>
                       </p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <form method="POST" action="/consultaFisioterapia/view-patient.jsp">
+                            <input type="hidden" name="patientId" value="<%= paciente.getId() %>">
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">Ver datos</button>
+                          </form>
                           <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                           <form method="POST" action="/consultaFisioterapia/delete-patient.jsp">
                             <input type="hidden" name="patientId" value="<%= paciente.getId() %>">
