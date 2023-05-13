@@ -8,6 +8,7 @@ public class Database {
 
     private Connection connection;
 
+
     public Connection getConnection() {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");

@@ -25,6 +25,13 @@ public class Paciente {
         this.telefono = telefono;
     }
 
+    public Paciente(int id, String nombre, String apellido, int telefono) {
+
+    }
+
+    public Paciente(String id, String nombreHTML, String apellidoHTML, String fechaStringHTML, int telefonoHTML) {
+    }
+
     public String getId() {
         return id;
     }

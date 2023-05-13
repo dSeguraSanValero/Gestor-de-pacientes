@@ -3,11 +3,19 @@
 <%@ page import = "com.svalero.centroFisioterapia.paciente.Paciente" %>
 <%@ page import = "com.svalero.centroFisioterapia.Aplicacion" %>
 <%@ page import = "com.svalero.centroFisioterapia.Menu" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page contentType="text/html" %>
+<%@ page pageEncoding="UTF-8" %>
+
 
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head><script src="../assets/js/color-modes.js"></script>
 
+    <meta http.equiv="Content-Type">
+    <meta content="text/html">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -123,7 +131,7 @@
           <div class="row">
             <div class="col-sm-8 col-md-7 py-4">
               <h4>DAW</h4>
-              <p class="text-body-secondary">Aplicacion web de gestion de pacientes</p>
+              <p class="text-body-secondary">Aplicación web de gestión de pacientes</p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
               <h4>Autoria</h4>
@@ -152,7 +160,7 @@
       <section class="py-5 text-center container">
         <div class="row py-lg-5">
           <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Bienvenido a la aplicacion web de gestion de pacientes</h1>
+            <h1 class="fw-light">Bienvenido a la aplicación web de gestión de pacientes</h1>
             <p class="lead text-body-secondary">Introduce, modifica, elimina registros sobre tus pacientes y sus tratamientos, para tu consulta de fisioterapia</p>
             <p>
               <a href="/consultaFisioterapia/add-patient.jsp" class="btn btn-primary my-2">Main call to action</a>
@@ -165,12 +173,26 @@
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
 
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <%
+            Database db = new Database();
+            PacienteDAO dao = new PacienteDAO(db.getConnection());
+            List<Paciente> pacientes = dao.verTodosPacientes();
+          %>
+          <div class="row">
+            <% for (Paciente paciente : pacientes) { %>
             <div class="col">
               <div class="card shadow-sm">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                 <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">
+                    <%
+                    out.println("<p>Nombre: " + paciente.getNombre() + "</p>");
+                    out.println("<p>Apellidos: " + paciente.getApellidos() + "</p>");
+                    out.println("<p>Fecha de nacimiento: " + paciente.getFechaNacimiento() + "</p>");
+                    out.println("<p>Telefono: " + paciente.getTelefono() + "</p>");
+                    out.println("<p>Identificador de paciente: " + paciente.getId() + "</p>");
+                    %>
+                  </p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -180,7 +202,9 @@
                   </div>
                 </div>
               </div>
+              <% } %>
             </div>
+
             <div class="col">
               <div class="card shadow-sm">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
