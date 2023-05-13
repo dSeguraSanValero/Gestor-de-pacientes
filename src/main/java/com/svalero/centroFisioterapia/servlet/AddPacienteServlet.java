@@ -3,24 +3,17 @@ package com.svalero.centroFisioterapia.servlet;
 import com.svalero.centroFisioterapia.dao.Database;
 import com.svalero.centroFisioterapia.dao.PacienteDAO;
 import com.svalero.centroFisioterapia.paciente.Paciente;
-import com.svalero.centroFisioterapia.util.DateUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @WebServlet("/add-paciente")

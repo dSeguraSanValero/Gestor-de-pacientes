@@ -103,6 +103,9 @@
       .bd-mode-toggle {
         z-index: 1500;
       }
+      .título-seccion {
+        text-align: center;
+      }
     </style>
 
 
@@ -134,7 +137,7 @@
               <p class="text-body-secondary">Aplicación web de gestión de pacientes</p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
-              <h4>Autoria</h4>
+              <h4>Autoría</h4>
               <ul class="list-unstyled">
                 <li><p>Daniel Segura Caro</p></li>
               </ul>
@@ -146,7 +149,7 @@
         <div class="container">
           <a href="#" class="navbar-brand d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-            <strong>Barra de navegacion</strong>
+            <strong>Barra de navegación</strong>
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -163,127 +166,55 @@
             <h1 class="fw-light">Bienvenido a la aplicación web de gestión de pacientes</h1>
             <p class="lead text-body-secondary">Introduce, modifica, elimina registros sobre tus pacientes y sus tratamientos, para tu consulta de fisioterapia</p>
             <p>
-              <a href="/consultaFisioterapia/add-patient.jsp" class="btn btn-primary my-2">Main call to action</a>
+              <a href="/consultaFisioterapia/add-patient.jsp" class="btn btn-primary my-2">Añadir a un paciente</a>
               <a href="#" class="btn btn-secondary my-2">Secondary action</a>
             </p>
           </div>
         </div>
       </section>
 
+      <h2 class="título-seccion">Pacientes</h2>
+
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
-
-          <%
-            Database db = new Database();
-            PacienteDAO dao = new PacienteDAO(db.getConnection());
-            List<Paciente> pacientes = dao.verTodosPacientes();
+          <% Database db = new Database();
+             PacienteDAO dao = new PacienteDAO(db.getConnection());
+             List<Paciente> pacientes = dao.verTodosPacientes();
           %>
-          <div class="row">
-            <% for (Paciente paciente : pacientes) { %>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
-                  <p class="card-text">
-                    <%
-                    out.println("<p>Nombre: " + paciente.getNombre() + "</p>");
-                    out.println("<p>Apellidos: " + paciente.getApellidos() + "</p>");
-                    out.println("<p>Fecha de nacimiento: " + paciente.getFechaNacimiento() + "</p>");
-                    out.println("<p>Telefono: " + paciente.getTelefono() + "</p>");
-                    out.println("<p>Identificador de paciente: " + paciente.getId() + "</p>");
-                    %>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+            <div class="col-md-9">
+              <div class="row row-cols-1 row-cols-md-3 g-4">
+                <% for (Paciente paciente : pacientes) { %>
+                <div class="col">
+                  <div class="card h-100">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= paciente.getNombre() %> <%= paciente.getApellidos() %></h5>
+                      <p class="card-text">
+                        <p>Fecha de nacimiento: <%= paciente.getFechaNacimiento() %></p>
+                        <p>Telefono: <%= paciente.getTelefono() %></p>
+                        <p>Identificador de paciente: <%= paciente.getId() %></p>
+                      </p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                          <form method="POST" action="/consultaFisioterapia/delete-patient.jsp">
+                            <input type="hidden" name="patientId" value="<%= paciente.getId() %>">
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">Borrar</button>
+                          </form>
+                        </div>
+                      </div>
                     </div>
-                    <small class="text-body-secondary">9 mins</small>
                   </div>
                 </div>
-              </div>
-              <% } %>
-            </div>
-
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-body-secondary">9 mins</small>
-                  </div>
-                </div>
+                <% } %>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+
 
     </main>
 

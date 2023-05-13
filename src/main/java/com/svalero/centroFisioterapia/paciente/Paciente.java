@@ -32,6 +32,10 @@ public class Paciente {
     public Paciente(String id, String nombreHTML, String apellidoHTML, String fechaStringHTML, int telefonoHTML) {
     }
 
+    public Paciente(String id, String nombre) {
+
+    }
+
     public String getId() {
         return id;
     }

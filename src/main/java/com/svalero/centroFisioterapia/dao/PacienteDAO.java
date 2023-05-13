@@ -51,6 +51,13 @@ public class PacienteDAO {
         return statement.executeUpdate() != 0;
     }
 
+    public boolean borrarPacientePorId(String patientId) throws SQLException {
+        String sql = "DELETE FROM PACIENTES WHERE id = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, patientId);
+        return statement.executeUpdate() != 0;
+    }
+
     public List<Paciente> getList(ResultSet resultSet) throws SQLException {
         List<Paciente> pacientes = new ArrayList<>();
 
@@ -67,4 +74,5 @@ public class PacienteDAO {
 
         return pacientes;
     }
+
 }
