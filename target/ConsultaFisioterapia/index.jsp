@@ -27,8 +27,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-
-
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -202,7 +200,7 @@
                             </form>
                             <form method="POST" action="/consultaFisioterapia/add-treatment.jsp">
                                 <input type="hidden" name="physioId" value="<%= fisioterapeuta.getId() %>">
-                                <button type="submit" class="btn btn-sm btn-outline-secondary">Añadir tratamiento</button>
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Añadir cita</button>
                             </form>
                             <form method="POST" action="/consultaFisioterapia/edit-physio.jsp">
                                 <input type="hidden" name="physioId" value="<%= fisioterapeuta.getId() %>">

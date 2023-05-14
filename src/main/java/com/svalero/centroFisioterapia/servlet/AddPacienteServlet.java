@@ -33,6 +33,8 @@ public class AddPacienteServlet extends HttpServlet {
         LocalDate fechaNacimiento = LocalDate.parse(request.getParameter("fechaNacimiento"));
         int telefonoHTML = Integer.parseInt(request.getParameter("telefono"));
 
+        System.out.println(fechaNacimiento);
+
         UUID uuid = UUID.randomUUID();
         String id = uuid.toString();
 

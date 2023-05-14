@@ -1,14 +1,10 @@
 package com.svalero.centroFisioterapia.dao;
 
 import com.svalero.centroFisioterapia.paciente.Paciente;
-import com.svalero.centroFisioterapia.tratamientos.Tratamiento;
 import com.svalero.centroFisioterapia.util.DateUtils;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +26,6 @@ public class PacienteDAO {
         statement.setDate(4, DateUtils.toDate(paciente.getFechaNacimiento()));
         statement.setInt(5, paciente.getTelefono());
         statement.executeUpdate();
-    }
-
-
-    public void modificarPaciente(Paciente paciente) throws SQLException {
-
     }
 
     public Paciente getPacientePorId(String idPaciente) throws SQLException {
@@ -104,13 +95,13 @@ public class PacienteDAO {
     }
 
 
-    public boolean editarPaciente(int nuevoTelefono, String nuevoNombre, String nuevoApellido, String patientId) throws SQLException {
+    public boolean editarPaciente(int nuevoTelefono, String nuevoNombre, String nuevoApellido, LocalDate nuevaFechaNacimiento, String patientId) throws SQLException {
         String sql = "UPDATE PACIENTES SET TELEFONO = ?, NOMBRE = ?, APELLIDO = ? WHERE ID_PACIENTE = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, nuevoTelefono);
         statement.setString(2, nuevoNombre);
         statement.setString(3, nuevoApellido);
-        statement.setString(4, patientId);
+        statement.setString(4, String.valueOf(patientId));
         return statement.executeUpdate() != 0;
     }
 
@@ -155,5 +146,4 @@ public class PacienteDAO {
 
         return pacientes;
     }
-
 }
