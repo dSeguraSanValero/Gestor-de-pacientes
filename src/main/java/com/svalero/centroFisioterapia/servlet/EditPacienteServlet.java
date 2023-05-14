@@ -35,6 +35,7 @@ public class EditPacienteServlet extends HttpServlet {
         LocalDate nuevaFechaNacimiento = LocalDate.parse(request.getParameter("nuevaFechaNacimiento"));
         String patientId = request.getParameter("patientId");
 
+
         database = new Database();
         connection = database.getConnection();
 

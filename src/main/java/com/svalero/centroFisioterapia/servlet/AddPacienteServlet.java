@@ -33,7 +33,7 @@ public class AddPacienteServlet extends HttpServlet {
         LocalDate fechaNacimiento = LocalDate.parse(request.getParameter("fechaNacimiento"));
         int telefonoHTML = Integer.parseInt(request.getParameter("telefono"));
 
-        System.out.println(fechaNacimiento);
+
 
         UUID uuid = UUID.randomUUID();
         String id = uuid.toString();
@@ -43,6 +43,7 @@ public class AddPacienteServlet extends HttpServlet {
         connection = database.getConnection();
 
         Paciente paciente = new Paciente(id, nombreHTML, apellidoHTML, fechaNacimiento, telefonoHTML);
+
         try {
             PacienteDAO pacienteDAO = new PacienteDAO(connection);
             pacienteDAO.registrarPaciente(paciente);

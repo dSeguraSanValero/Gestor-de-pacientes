@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="AA2-Programacion-main" />
+        <module name="AA2 Daniel Segura" />
         <module name="ActividadAprendizaje2DanielSegura" />
       </profile>
     </annotationProcessing>
